@@ -34,6 +34,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("io.github.microutils:kotlin-logging:3.0.5")
     testImplementation("org.springframework.security:spring-security-test")
