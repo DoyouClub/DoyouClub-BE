@@ -1,0 +1,12 @@
+spring:
+  main:
+    banner-mode: off
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+    redis:
+      url: ${REDIS_URL}
+jwt:
+  secretKey: ${JWT_SECRET_KEY}
+  accessTokenExpire: ${ACCESS_TOKEN_EXPIRE}
+  refreshTokenExpire: ${REFRESH_TOKEN_EXPIRE}
