@@ -6,14 +6,14 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 
 data class JwtAuthentication(
-    val id: Int,
+    val id: String,
     val roles: Set<GrantedAuthority>
 ) : Authentication {
     companion object {
         operator fun invoke(claims: Claims): JwtAuthentication =
             with(claims) {
                 JwtAuthentication(
-                    id = get("id") as Int,
+                    id = get("id") as String,
                     roles = (get("roles") as String)
                         .split(",")
                         .map(::SimpleGrantedAuthority)
