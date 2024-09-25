@@ -1,5 +1,6 @@
 package com.doyouclub.backend.global.jwt.core
 
+import com.doyouclub.backend.domain.user.model.User
 import com.doyouclub.backend.global.jwt.security.JwtAuthentication
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
@@ -17,10 +18,16 @@ class JwtProvider(
             .setSigningKey(secretKey)
             .build()!!
 
-    fun createAccessToken(claims: Map<String, *>): String =
+    fun createTokens(user: User): Pair<String, String> =
+        mapOf(
+            "id" to user.id,
+            "roles" to user.roles.joinToString(",")
+        ).let { createAccessToken(it) to createRefreshToken(it) }
+
+    private fun createAccessToken(claims: Map<String, *>): String =
         createToken(claims, accessTokenExpire)
 
-    fun createRefreshToken(claims: Map<String, *>): String =
+    private fun createRefreshToken(claims: Map<String, *>): String =
         createToken(claims, refreshTokenExpire)
 
     fun getAuthentication(token: String): JwtAuthentication =
