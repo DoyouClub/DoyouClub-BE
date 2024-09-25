@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    include: env
   main:
     banner-mode: off
   data:
