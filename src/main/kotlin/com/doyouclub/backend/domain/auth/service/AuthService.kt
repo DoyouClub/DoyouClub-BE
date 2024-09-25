@@ -74,4 +74,8 @@ class AuthService(
             refreshToken = refreshToken
         )
     }
+
+    suspend fun logout(id: String) {
+        refreshTokenRepository.deleteByKey(id)
+    }
 }

@@ -5,10 +5,7 @@ import com.doyouclub.backend.domain.auth.dto.request.SignInRequest
 import com.doyouclub.backend.domain.auth.dto.response.RefreshResponse
 import com.doyouclub.backend.domain.auth.dto.response.SignInResponse
 import com.doyouclub.backend.domain.auth.service.AuthService
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/auth")
 @RestController
@@ -28,4 +25,12 @@ class AuthController(
         request: RefreshRequest
     ): RefreshResponse =
         authService.refresh(request)
+
+    @GetMapping("/logout/{id}")
+    suspend fun logout(
+        @PathVariable("id")
+        id: String
+    ) {
+        authService.logout(id)
+    }
 }
