@@ -3,6 +3,7 @@ package com.doyouclub.backend.global.config
 import com.doyouclub.backend.global.jwt.security.JwtFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder
@@ -28,7 +29,9 @@ class SecurityConfiguration {
             securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
             exceptionHandling { it.authenticationEntryPoint(HttpStatusServerEntryPoint(HttpStatus.UNAUTHORIZED)) }
             authorizeExchange {
-                it.anyExchange()
+                it.pathMatchers(HttpMethod.POST, "/auth/**")
+                    .permitAll()
+                    .anyExchange()
                     .authenticated()
             }
             addFilterAt(jwtFilter, SecurityWebFiltersOrder.AUTHORIZATION)
