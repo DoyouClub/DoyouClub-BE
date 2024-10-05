@@ -12,5 +12,6 @@ data class User(
     val email: String,
     val name: String,
     val provider: Provider,
-    val roles: Set<Role>
+    val roles: Set<Role>,
+    val clubIds: List<String>
 )
