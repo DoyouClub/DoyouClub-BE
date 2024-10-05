@@ -86,7 +86,10 @@ class AuthService(
 
     suspend fun signUp(request: SignUpRequest): SignUpResponse = coroutineScope {
         with(request) {
-            val getUserJob = launch { userRepository.findByEmail(email) ?: throw AccountAlreadyExistException() }
+            val getUserJob = launch {
+                userRepository.findByEmail(email)
+                    ?.run { throw AccountAlreadyExistException() }
+            }
             val getSignUpTokenDeferred =
                 async { signUpTokenRepository.findByKey(email) ?: throw SignUpTokenNotFoundException() }
 
@@ -100,7 +103,8 @@ class AuthService(
                     email = email,
                     name = name,
                     provider = signUpToken.provider,
-                    roles = setOf(Role.MEMBER)
+                    roles = setOf(Role.MEMBER),
+                    clubIds = emptyList()
                 )
             )
             val (accessToken, refreshToken) = jwtProvider.createTokens(user)
