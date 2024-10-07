@@ -103,8 +103,8 @@ class AuthService(
                     email = email,
                     name = name,
                     provider = signUpToken.provider,
-                    roles = setOf(Role.MEMBER),
-                    clubIds = emptyList()
+                    roles = hashSetOf(Role.MEMBER),
+                    clubIds = hashSetOf()
                 )
             )
             val (accessToken, refreshToken) = jwtProvider.createTokens(user)

@@ -13,10 +13,10 @@ class ClubService(
     private val clubRepository: ClubRepository,
     private val userRepository: UserRepository
 ) {
-    suspend fun getMyClubs(id: String): Flow<ClubResponse> {
-        val user = userRepository.findById(id) ?: throw UserNotFoundException()
+    suspend fun getClubsByUserId(userId: String): Flow<ClubResponse> {
+        val user = userRepository.findById(userId) ?: throw UserNotFoundException()
 
-        return clubRepository.findByIdIn(user.clubIds)
+        return clubRepository.findByIdIn(user.clubIds.toList())
             .map { ClubResponse(it) }
     }
 }
