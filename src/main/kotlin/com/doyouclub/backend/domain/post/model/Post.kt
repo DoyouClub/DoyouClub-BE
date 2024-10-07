@@ -1,6 +1,5 @@
 package com.doyouclub.backend.domain.post.model
 
-import com.doyouclub.backend.domain.board.model.Board
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.Indexed
@@ -12,7 +11,7 @@ data class Post(
     @Id
     val id: String? = null,
     val writerId: String,
-    val board: Board,
+    val boardId: String,
     val title: String,
     val content: String,
     val likedUserIds: HashSet<String> = hashSetOf(),
