@@ -3,7 +3,6 @@ package com.doyouclub.backend.domain.club.repository
 import com.doyouclub.backend.domain.club.model.Club
 import com.doyouclub.backend.domain.club.model.enum.Activity
 import com.doyouclub.backend.domain.club.model.enum.Tag
-import com.doyouclub.backend.domain.post.model.Post
 import com.doyouclub.backend.global.util.query
 import com.doyouclub.backend.global.util.sortBy
 import kotlinx.coroutines.flow.Flow
@@ -34,7 +33,7 @@ class CustomClubRepository(
         }
 
     private fun Query.paging(lastId: String?, size: Int) {
-        lastId?.let { addCriteria(Post::createdDate lt it) }
+        lastId?.let { addCriteria(Club::id lt it) }
         with(Club::id sortBy Direction.DESC)
         limit(size)
     }
